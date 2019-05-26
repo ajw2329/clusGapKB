@@ -4,6 +4,7 @@ clusGapKB <- function (
       K.max,
       B=100,
       d.power=1,
+      num_cores=1,
       verbose=interactive(),
       ...)
     {
@@ -25,7 +26,7 @@ clusGapKB <- function (
       if (Sys.info()['sysname'] == 'Windows') {
         funParallel <- parallel::parLapply
       } else {
-        funParallel <- parallel::mclapply
+        funParallel <- function(x, y) parallel::mclapply(x, y, mc.cores = num_cores)
       }
       ############
     
